@@ -1,0 +1,3 @@
+# App details.
+
+Flutter project.
