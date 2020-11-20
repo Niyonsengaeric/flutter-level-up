@@ -21,10 +21,39 @@ class _QuoteListState extends State<QuoteList> {
         author: 'Niyonsenga Eric',
         text: 'The truth is rarely pure and never simple')
   ];
+
+  Widget quoteTemplate(quote) {
+    return Card(
+        margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                quote.text,
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.grey[600],
+                ),
+              ),
+              SizedBox(height: 6.0),
+              Text(
+                quote.author,
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.grey[800],
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.red[200],
       appBar: AppBar(
         title: Text('Awesome quotes'),
         centerTitle: true,
@@ -32,7 +61,9 @@ class _QuoteListState extends State<QuoteList> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: quotes.map((quote) => Text('${quote.text} ~ ${quote.author}')).toList(),
+        children: quotes
+            .map((quote) => quoteTemplate(quote))
+            .toList(),
       ),
     );
   }
