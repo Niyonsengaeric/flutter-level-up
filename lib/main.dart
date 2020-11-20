@@ -1,52 +1,47 @@
 import 'package:flutter/material.dart';
+import 'quote.dart';
+import 'quote_card.dart';
 
-void main() => runApp(MaterialApp(home: Home()));
+void main() => runApp(MaterialApp(home: QuoteList()));
 
-class Home extends StatelessWidget {
+class QuoteList extends StatefulWidget {
+  @override
+  _QuoteListState createState() => _QuoteListState();
+}
+
+class _QuoteListState extends State<QuoteList> {
+  List<Quote> quotes = [
+    Quote(author: 'Osca wilder', text: 'Osca wilder Quote'),
+    Quote(
+        author: 'Niyonsenga Eric',
+        text: ' Be yourself; everyone else is arleady taken'),
+    Quote(
+        author: 'Niyonsenga Eric',
+        text: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'Niyonsenga Eric',
+        text: 'The truth is rarely pure and never simple')
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[300],
       appBar: AppBar(
-          title: Text('My First App'),
-          centerTitle: true,
-          backgroundColor: Colors.red[600]),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Expanded(
-            flex:3,
-            child: Image.asset('assets/space-safari-background.png'),
-          ),
-          Expanded(
-            flex:2,
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              color: Colors.green,
-              child: Text('1'),
-            ),
-          ),
-          Expanded(
-            flex:2,
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              color: Colors.yellow,
-              child: Text('2'),
-            ),
-          ),
-          Expanded(
-            flex:4,
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              color: Colors.blue,
-              child: Text('3'),
-            ),
-          ),
-        ],
+        title: Text('Awesome quotes'),
+        centerTitle: true,
+        backgroundColor: Colors.green[400],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Text("click"),
-        backgroundColor: Colors.red[400],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: quotes.map((quote) => QuoteCard(
+          quote: quote,
+          delete:(){
+            setState(() {
+              quotes.remove(quote);
+            });
+          }
+          )).toList(),
       ),
     );
   }
