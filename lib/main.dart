@@ -26,15 +26,22 @@ class _QuoteListState extends State<QuoteList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[200],
+      backgroundColor: Colors.lightBlue[300],
       appBar: AppBar(
         title: Text('Awesome quotes'),
         centerTitle: true,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.green[400],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: quotes.map((quote) => QuoteCard(quote: quote)).toList(),
+        children: quotes.map((quote) => QuoteCard(
+          quote: quote,
+          delete:(){
+            setState(() {
+              quotes.remove(quote);
+            });
+          }
+          )).toList(),
       ),
     );
   }
